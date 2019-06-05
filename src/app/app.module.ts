@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule, LOCALE_ID } from '@angular/core'
+import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core'
 import { HttpClientModule } from '@angular/common/http'
 import { RouterModule, PreloadAllModules } from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -8,6 +8,7 @@ import { LocationStrategy, HashLocationStrategy} from '@angular/common'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import {ROUTES} from './app.routes';
+import { ApplicationErrorHandler } from "./app.error-handler";
 
 import { AppComponent } from './app.component'
 import { HeaderComponent } from './header/header.component'
@@ -21,7 +22,10 @@ import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shoppin
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component'
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { OrderSummaryComponent } from './order-summary/order-summary.component'
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component'
+
 
 @NgModule({
   declarations: [
@@ -38,6 +42,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
     ReviewsComponent,
     OrderSummaryComponent,
     NotFoundComponent,
+    LoginComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,8 @@ import { NotFoundComponent } from './not-found/not-found.component'
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: ErrorHandler, useClass: ApplicationErrorHandler}
   ],
   bootstrap: [AppComponent]
 })
